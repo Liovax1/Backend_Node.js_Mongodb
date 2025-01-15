@@ -6,7 +6,8 @@ export const createArticle = async (article: Article): Promise<Article> => {
     const newArticle = await ArticleModel.create(article);
     return newArticle;
   } catch (error) {
-    throw error;
+    console.error('Erreur lors de la création de l\'article:', error);
+    throw new Error('Erreur lors de la création de l\'article');
   }
 };
 
@@ -15,7 +16,8 @@ export const getAllArticles = async (): Promise<Article[]> => {
     const articles = await ArticleModel.find();
     return articles;
   } catch (error) {
-    throw error;
+    console.error('Erreur lors de la récupération des articles:', error);
+    throw new Error('Erreur lors de la récupération des articles');
   }
 };
 
@@ -24,7 +26,8 @@ export const getArticleById = async (id: string): Promise<Article | null> => {
     const article = await ArticleModel.findById(id);
     return article;
   } catch (error) {
-    throw error;
+    console.error(`Erreur lors de la récupération de l'article avec l'id ${id}:`, error);
+    throw new Error('Erreur lors de la récupération de l\'article');
   }
 };
 
@@ -33,7 +36,8 @@ export const updateArticleById = async (id: string, updatedArticle: Partial<Arti
     const article = await ArticleModel.findByIdAndUpdate(id, updatedArticle, { new: true });
     return article;
   } catch (error) {
-    throw error;
+    console.error(`Erreur lors de la mise à jour de l'article avec l'id ${id}:`, error);
+    throw new Error('Erreur lors de la mise à jour de l\'article');
   }
 };
 
@@ -41,6 +45,7 @@ export const deleteArticleById = async (id: string): Promise<void> => {
   try {
     await ArticleModel.findByIdAndDelete(id);
   } catch (error) {
-    throw error;
+    console.error(`Erreur lors de la suppression de l'article avec l'id ${id}:`, error);
+    throw new Error('Erreur lors de la suppression de l\'article');
   }
 };

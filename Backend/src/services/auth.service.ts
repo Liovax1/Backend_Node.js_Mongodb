@@ -16,7 +16,7 @@ export const login = async (email: string, password: string): Promise<{ accessTo
     console.log('RefreshToken généré:', refreshToken); // Ajoutez ce log
     return { accessToken, refreshToken };
   } catch (error) {
-    throw error;
+    throw new Error('Erreur lors de la connexion');
   }
 };
 
@@ -24,7 +24,7 @@ export const logout = async (token: string): Promise<void> => {
   try {
     await JwUtils.deleteRefreshToken(token);
   } catch (error) {
-    throw error;
+    throw new Error('Erreur lors de la déconnexion');
   }
 };
 
@@ -34,7 +34,7 @@ export const refreshAccessToken = async (refreshToken: string): Promise<{ access
     const newAccessToken = JwUtils.generateAccessToken({ email: decoded.email });
     return { accessToken: newAccessToken };
   } catch (error) {
-    throw new Error('Token de rafraîchissement invalide');
+    throw new Error('Erreur lors du rafraîchissement du token d\'accès');
   }
 };
 
@@ -42,6 +42,6 @@ export const verifyAccessToken = async (token: string): Promise<any> => {
   try {
     return JwUtils.verifyAccessToken(token);
   } catch (error) {
-    throw new Error('Token invalide');
+    throw new Error('Erreur lors de la vérification du token d\'accès');
   }
 };

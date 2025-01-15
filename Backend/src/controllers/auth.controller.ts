@@ -9,7 +9,7 @@ export const login = async (req: Request, res: Response): Promise<void> => {
     } catch (error) {
         res.status(401).json({ message: 'Invalid email or password' });
     }
-}
+};
 
 export const logout = async (req: Request, res: Response): Promise<void> => {
     const token = req.headers.authorization?.replace('Bearer ', '');
@@ -19,9 +19,9 @@ export const logout = async (req: Request, res: Response): Promise<void> => {
         await authservice.logout(token);
         res.status(200).send('Déconnexion réussie');
     } catch (error) {
-        res.status(500).json({ message: 'Erreur de déconnexion'});
+        res.status(500).json({ message: 'Erreur de déconnexion' });
     }
-}
+};
 
 export const refreshAccessToken = async (req: Request, res: Response): Promise<void> => {
     try {

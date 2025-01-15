@@ -9,4 +9,10 @@ app.use(logger);
 
 app.use('/users', userRouter);
 
+// Gestion des erreurs globales
+app.use((err, req, res, next) => {
+  console.error('Erreur non gérée:', err);
+  res.status(500).send('Erreur interne du serveur');
+});
+
 export default app;
